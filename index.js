@@ -7,12 +7,14 @@ const app = express();
 const router = require('./router');
 const mongoose = require('mongoose');
 const {MongoClient} = require('mongodb');
+const cors = require('cors');
 
 //DB Setup
 mongoose.connect('mongodb://localhost/auth');
 
 //App Setup
 app.use(morgan('combined'));
+app.use(cors());
 app.use(bodyParser.json({type:'*/*' }));
 router(app);
 
