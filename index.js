@@ -10,7 +10,7 @@ const {MongoClient} = require('mongodb');
 const cors = require('cors');
 
 //DB Setup
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/auth');
+mongoose.connect(process.env.PORT || 'mongodb://localhost/auth');
 
 //App Setup
 app.use(morgan('combined'));
