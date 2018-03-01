@@ -43,7 +43,9 @@ module.exports = function(app) {
       return res.status(404).send('not valid objectID');
     }
 
-    Todo.findOne().then((todo) => {
+    Todo.findOne({
+      _id: id
+    }).then((todo) => {
         res.send({todo});
     }, (e) => {
       res.status(404).send(e.response)
