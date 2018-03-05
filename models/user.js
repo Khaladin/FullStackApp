@@ -6,6 +6,11 @@ const bcrypt = require('bcrypt-nodejs');
 const userSchema = new Schema({
   email: { type: String, unique: true, lowercase: true },
   password: String
+  // creator:
+  //   {
+  //     type:mongoose.Schema.Types.ObjectId,
+  //     ref:'Todo'
+  //   }
 });
 //on Save Hook, encrypt password
 // Before saving a model, run this function

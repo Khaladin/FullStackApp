@@ -3,6 +3,7 @@ const passportService = require('./services/passport');
 const passport = require('passport');
 const {ObjectID} = require('mongodb');
 const {Todo} = require('./models/todo');
+const mongoose = require('mongoose')
 
 const requireAuth = passport.authenticate('jwt', {session: false});
 const requireSignin = passport.authenticate('local', {session: false});
@@ -15,20 +16,22 @@ module.exports = function(app) {
   app.post('/signup', Authentication.signup);
 
   app.post('/newpost', (req, res) => {
-    var todo = new Todo({
-      title: req.body.title,
-      content: req.body.content
-    });
+      var todo = new Todo({
+        title: req.body.title,
+        content: req.body.content,
+        creator: req.body.email, // adjust this line
+      });
 
-    todo.save().then((doc) => {
-      res.send(doc);
-    }, (e) => {
-      res.send(e);
-    });
+      todo.save().then((doc) => {
+        res.send(doc);
+      }, (e) => {
+        res.send(e);
+      });
   });
 
+
   app.get('/todos', (req, res) => {
-    Todo.find()
+    Todo.find({})
       .then((todos) => {
         res.send({todos});
       }, (e) => {
@@ -44,7 +47,7 @@ module.exports = function(app) {
     }
 
     Todo.findOne({
-      _id: id
+      _id: id,
     }).then((todo) => {
         res.send({todo});
     }, (e) => {

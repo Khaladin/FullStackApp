@@ -12,6 +12,10 @@ var Todo = mongoose.model('Todo', {
     required: true,
     minlength: 1,
     trim: true
+  },
+  creator: { // added this bit of code
+    type: String,
+    required: true,
   }
 });
 
